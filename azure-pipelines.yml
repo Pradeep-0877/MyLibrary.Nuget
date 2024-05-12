@@ -15,7 +15,7 @@ stages:
         inputs:
           command: 'restore'
           projects: '**/*.csproj'
-          restoreArguments: '--configuration Release'
+          # restoreArguments: '--configuration Release'
           feedsToUse: 'select'
         displayName: dotnet restore
       - task: DotNetCoreCLI@2
