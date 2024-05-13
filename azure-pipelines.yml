@@ -1,50 +1,18 @@
-trigger:
+trigger: 
 - master
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  version: 1.0.2-$(Build.BuildId)
-
-stages:
-- stage: Build_Stage
-  displayName: 
-  jobs:
-  - job: BuildNuget
-    displayName: Build Nuget packages
-    variables:
-      BuildConfiguration: release
-    steps:
-
-    - task: DotNetCoreCLI@2
-      displayName: Restore Packages
-      inputs:
-        command: 'restore'
-        projects: '**/*.csproj'
-        feedsToUse: 'select'
-
-    - task: DotNetCoreCLI@2
-      displayName: Build Apps
-      inputs:
-        command: 'build'
-        projects: '**/*.csproj'
-        arguments: '--configuration $(BuildConfiguration)'
-
-    - script: printenv
-
-    - task: DotNetCoreCLI@2
-      displayName: Pack Nuget Package
-      inputs:
-        command: 'pack'
-        packagesToPack: '**/*.csproj'
-        versioningScheme: 'byEnvVar'
-        versionEnvVar: 'version'
-
-    - task: DotNetCoreCLI@2
-      displayName: Push Nuget Package
-      inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-        nuGetFeedType: 'internal'
-        publishVstsFeed: '8d666db3-5e27-4d50-8508-c6a8f504faad/ec8ef0ae-dee4-4611-9868-3cc80eb65484'
+pool: 
+  vmImage: ubuntu-latest
+variables: 
+  name: Mohith
+stages: 
+- stage: variable_groups
+  displayName:  displaying variable groups
+  jobs: 
+  - job: Variable_groups
+    displayName: display variables
+    variables: 
+    - group: devops
+    pool: 
+      vmImage: ubuntu-latest
+    steps: 
+    - script: 'my name is $(name)'
